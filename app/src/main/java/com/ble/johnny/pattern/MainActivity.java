@@ -8,8 +8,17 @@ import Observer.BinaryObserver;
 import Observer.HexaObserver;
 import Observer.OctalObserver;
 import Observer.Subject;
+import bridge.Assemble;
+import bridge.Bike;
+import bridge.Car;
+import bridge.Produce;
+import bridge.Vehicle;
+import builder.McFood;
 import factory.FactoryPatternDemo;
 import singleton.SingleObject;
+
+import static builder.McFood.Drink.DRINK_COLA;
+import static builder.McFood.Hamburg.HAMBURG_BEEF;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         SingleObject obj = SingleObject.getInstance();
         obj.showMessage();
 
+        //observer
         Subject subject = new Subject();
         HexaObserver hexobj = new HexaObserver(subject);
         OctalObserver octobj = new OctalObserver(subject);
@@ -31,10 +41,23 @@ public class MainActivity extends AppCompatActivity {
         hexobj.Gettest();
         octobj.Gettest();
         binobj.Gettest();
-
         System.out.println("First state change: 15");
         subject.setState(15);
         System.out.println("Second state change: 10");
         subject.setState(10);
+
+        //builder
+        McFood food = new McFood.Builder()
+                .drink(new McFood.Drink(DRINK_COLA))
+                .addIce(false)  //去冰
+                .hamburg(new McFood.Hamburg(HAMBURG_BEEF))  //牛肉汉堡
+                .takeOut(true)  //外带
+                .totalCount(3)  //总共*3
+                .create();
+        //bridge
+        Vehicle vehicle1 = new Car(new Produce(), new Assemble());
+        vehicle1.manufacture();
+        Vehicle vehicle2 = new Bike(new Produce(), new Assemble());
+        vehicle2.manufacture();
     }
 }
