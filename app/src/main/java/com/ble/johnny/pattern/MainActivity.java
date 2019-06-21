@@ -1,5 +1,7 @@
 package com.ble.johnny.pattern;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import bridge.Vehicle;
 import builder.McFood;
 import composite.Employee;
 import factory.FactoryPatternDemo;
+import prototype.Sensor;
 import singleton.SingleObject;
 
 import static builder.McFood.Drink.DRINK_COLA;
@@ -92,5 +95,33 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(employee);
             }
         }
+
+        //prototype
+        Sensor[] sensors = new Sensor[5];
+        sensors[0] = new Sensor();
+        sensors[0].setID(1);
+        sensors[0].setName("Sensor第一版");
+        sensors[0].setNickname("我的空氣探測器");
+        sensors[0].setVersion("1.0.0");
+        sensors[0].setWifiID("MYSENSORWIFIID1.0.0");
+        sensors[0].setWifiPass("THISisWiFiPasssOuO");
+        sensors[0].setData("None");
+
+        for(int i = 1 ; i < 5 ; i ++){
+            try{
+                //all instance clone by sensors[0]
+                //need casting
+                sensors[i] = (Sensor)sensors[0].clone();
+                sensors[i].setID(i+1);
+            }catch (CloneNotSupportedException e){
+                e.printStackTrace();
+            }
+        }
+        for (int i = 0 ; i < 5 ; i++) {
+            Log.d("prototype",sensors[i].getName());
+            Log.d("prototype","id:" + sensors[i].getID());
+        }
+
+
     }
 }
