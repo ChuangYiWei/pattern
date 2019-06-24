@@ -1,5 +1,6 @@
 package com.ble.johnny.pattern;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,9 @@ import composite.Employee;
 import factory.FactoryPatternDemo;
 import prototype.Sensor;
 import singleton.SingleObject;
+import stradegy.Context;
+import stradegy.OperationAdd;
+import stradegy.OperationMultiply;
 
 import static builder.McFood.Drink.DRINK_COLA;
 import static builder.McFood.Hamburg.HAMBURG_BEEF;
@@ -64,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
         Vehicle vehicle2 = new Bike(new Produce(), new Assemble());
         vehicle2.manufacture();
 
+
+        compositedemo();
+        prototypedemo();
+
+    }
+
+
+    void compositedemo()
+    {
         //composite
         Employee CEO = new Employee("John","CEO", 30000);
 
@@ -95,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(employee);
             }
         }
-
+    }
+    void prototypedemo()
+    {
         //prototype
         Sensor[] sensors = new Sensor[5];
         sensors[0] = new Sensor();
@@ -121,7 +136,19 @@ public class MainActivity extends AppCompatActivity {
             Log.d("prototype",sensors[i].getName());
             Log.d("prototype","id:" + sensors[i].getID());
         }
+    }
 
+    void Stradgeydemo()
+    {
+        Context ctx = new Context(new OperationAdd());
+        //of course we can use set method instead of use new
+        Log.d("Stradgeydemo","op add : " + ctx.executeStrategy(1,2));
 
+        ctx = new Context(new OperationMultiply());
+        ctx.executeStrategy(1,2);
+
+        Log.d("Stradgeydemo","op multi : " + ctx.executeStrategy(1,2));
     }
 }
+
+
