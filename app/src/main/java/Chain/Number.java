@@ -1,6 +1,6 @@
 package Chain;
 
-class Number
+public class Number
 {
     private int number;
 

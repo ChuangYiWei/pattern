@@ -1,6 +1,6 @@
 package Chain;
 
-class NegativeProcessor implements Chain
+public class NegativeProcessor implements Chain
 {
     private Chain nextInChain;
 

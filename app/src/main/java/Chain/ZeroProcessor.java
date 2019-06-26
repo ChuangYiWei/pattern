@@ -1,6 +1,6 @@
 package Chain;
 
-class ZeroProcessor implements Chain
+public class ZeroProcessor implements Chain
 {
 
     private Chain nextInChain;

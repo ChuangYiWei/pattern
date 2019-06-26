@@ -7,6 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import Chain.Chain;
+import Chain.Number;
+import Chain.NegativeProcessor;
+import Chain.PositiveProcessor;
+import Chain.ZeroProcessor;
 import Observer.BinaryObserver;
 import Observer.HexaObserver;
 import Observer.OctalObserver;
@@ -73,9 +78,25 @@ public class MainActivity extends AppCompatActivity {
 
 //        compositedemo();
 //        prototypedemo();
-        statepedemo();
+        //statepedemo();
+        chaindemo();
     }
 
+    void chaindemo()
+    {
+        //configure Chain of Responsibility
+        Chain c1 = new NegativeProcessor();
+        Chain c2 = new ZeroProcessor();
+        Chain c3 = new PositiveProcessor();
+        c1.setNext(c2);
+        c2.setNext(c3);
+
+        //calling chain of responsibility
+        c1.process(new Number(90));
+        c1.process(new Number(-50));
+        c1.process(new Number(0));
+        c1.process(new Number(91));
+    }
 
     void compositedemo()
     {
@@ -139,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d("prototype","id:" + sensors[i].getID());
         }
     }
+
+
 
     void statepedemo(){
         AlertStateContext stateContext = new AlertStateContext();
