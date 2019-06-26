@@ -21,6 +21,8 @@ import composite.Employee;
 import factory.FactoryPatternDemo;
 import prototype.Sensor;
 import singleton.SingleObject;
+import state.AlertStateContext;
+import state.Silent;
 import stradegy.Context;
 import stradegy.OperationAdd;
 import stradegy.OperationMultiply;
@@ -69,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         vehicle2.manufacture();
 
 
-        compositedemo();
-        prototypedemo();
-
+//        compositedemo();
+//        prototypedemo();
+        statepedemo();
     }
 
 
@@ -136,6 +138,16 @@ public class MainActivity extends AppCompatActivity {
             Log.d("prototype",sensors[i].getName());
             Log.d("prototype","id:" + sensors[i].getID());
         }
+    }
+
+    void statepedemo(){
+        AlertStateContext stateContext = new AlertStateContext();
+        stateContext.alert();
+        stateContext.alert();
+        stateContext.setState(new Silent());
+        stateContext.alert();
+        stateContext.alert();
+        stateContext.alert();
     }
 
     void Stradgeydemo()
