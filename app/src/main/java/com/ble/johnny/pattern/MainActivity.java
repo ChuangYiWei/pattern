@@ -24,6 +24,10 @@ import bridge.Vehicle;
 import builder.McFood;
 import composite.Employee;
 import factory.FactoryPatternDemo;
+import interpret.Context_Test;
+import interpret.Expression;
+import interpret.ExpressionImplA;
+import interpret.ExpressionImplB;
 import prototype.Sensor;
 import singleton.SingleObject;
 import state.AlertStateContext;
@@ -79,7 +83,36 @@ public class MainActivity extends AppCompatActivity {
 //        compositedemo();
 //        prototypedemo();
         //statepedemo();
-        chaindemo();
+//        chaindemo();
+        interpreterdemo();
+    }
+
+
+
+    void interpreterdemo()
+    {
+
+        Context_Test context = new Context_Test("a123 B456");
+        Expression expression = null;
+        for(String sentence : context.getContext().split(" "))
+        {
+            String first = sentence.substring(0, 1);
+            if(first.matches("[a-z]"))
+            {
+                expression = new ExpressionImplA();
+            }
+            else
+            {
+                expression = new ExpressionImplB();
+            }
+
+            /*
+             * 會輸出：
+             * 246
+             * 228
+             */
+            System.out.println(expression.interpret(sentence));
+        }
     }
 
     void chaindemo()
