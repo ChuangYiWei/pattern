@@ -40,6 +40,9 @@ import state.Silent;
 import stradegy.Context;
 import stradegy.OperationAdd;
 import stradegy.OperationMultiply;
+import template.NetOrder;
+import template.OrderProcessTemplate;
+import template.StoreOrder;
 
 import static builder.McFood.Drink.DRINK_COLA;
 import static builder.McFood.Hamburg.HAMBURG_BEEF;
@@ -90,7 +93,17 @@ public class MainActivity extends AppCompatActivity {
         //statepedemo();
 //        chaindemo();
 //        interpreterdemo();
-        decoratordemo();
+//        decoratordemo();
+        templatedemo();
+    }
+
+    void templatedemo()
+    {
+        OrderProcessTemplate netOrder = new NetOrder();
+        netOrder.processOrder(true);
+
+        OrderProcessTemplate storeOrder = new StoreOrder();
+        storeOrder.processOrder(true);
     }
 
     void decoratordemo()
