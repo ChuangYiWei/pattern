@@ -23,6 +23,11 @@ import bridge.Produce;
 import bridge.Vehicle;
 import builder.McFood;
 import composite.Employee;
+import decorator.FarmHouse;
+import decorator.FreshTomato;
+import decorator.Margherita;
+import decorator.Paneer;
+import decorator.Pizza;
 import factory.FactoryPatternDemo;
 import interpret.Context_Test;
 import interpret.Expression;
@@ -84,10 +89,28 @@ public class MainActivity extends AppCompatActivity {
 //        prototypedemo();
         //statepedemo();
 //        chaindemo();
-        interpreterdemo();
+//        interpreterdemo();
+        decoratordemo();
     }
 
+    void decoratordemo()
+    {
+        // create new margherita pizza
+        Pizza pizza = new Margherita();
+        System.out.println( pizza.getDescription() +
+                " Cost :" + pizza.getCost());
+        // create new FarmHouse pizza
+        Pizza pizza2 = new FarmHouse();
 
+        // decorate it with freshtomato topping
+        pizza2 = new FreshTomato(pizza2);
+
+        //decorate it with paneer topping
+        pizza2 = new Paneer(pizza2);
+
+        System.out.println( pizza2.getDescription() +
+                " Cost :" + pizza2.getCost());
+    }
 
     void interpreterdemo()
     {
