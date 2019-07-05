@@ -29,6 +29,8 @@ import decorator.Margherita;
 import decorator.Paneer;
 import decorator.Pizza;
 import factory.FactoryPatternDemo;
+import interator.Iterator_test;
+import interator.NameRepository;
 import interpret.Context_Test;
 import interpret.Expression;
 import interpret.ExpressionImplA;
@@ -94,7 +96,19 @@ public class MainActivity extends AppCompatActivity {
 //        chaindemo();
 //        interpreterdemo();
 //        decoratordemo();
-        templatedemo();
+//        templatedemo();
+        iterator_demo();
+    }
+
+    void iterator_demo()
+    {
+        NameRepository namesRepository = new NameRepository();
+        Iterator_test iterator = namesRepository.getIterator();
+        while(iterator.hasNext())
+        {
+            System.out.println("Name : " + iterator.next());
+        }
+
     }
 
     void templatedemo()
