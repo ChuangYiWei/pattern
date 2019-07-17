@@ -36,6 +36,8 @@ import interpret.Expression;
 import interpret.ExpressionImplA;
 import interpret.ExpressionImplB;
 import prototype.Sensor;
+import proxy.Internet;
+import proxy.ProxyInternet;
 import singleton.SingleObject;
 import state.AlertStateContext;
 import state.Silent;
@@ -97,7 +99,21 @@ public class MainActivity extends AppCompatActivity {
 //        interpreterdemo();
 //        decoratordemo();
 //        templatedemo();
-        iterator_demo();
+        proxy_demo();
+    }
+
+    void proxy_demo()
+    {
+        Internet internet = new ProxyInternet();
+        try
+        {
+            internet.connectTo("geeksforgeeks.org");
+            internet.connectTo("abc.com");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     void iterator_demo()
