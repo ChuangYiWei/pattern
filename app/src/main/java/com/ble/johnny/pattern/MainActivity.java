@@ -22,6 +22,12 @@ import bridge.Car;
 import bridge.Produce;
 import bridge.Vehicle;
 import builder.McFood;
+import command.Light;
+import command.LightOnCommand;
+import command.SimpleRemoteControl;
+import command.Stereo;
+import command.StereoOffCommand;
+import command.StereoOnWithCDCommand;
 import composite.Employee;
 import decorator.FarmHouse;
 import decorator.FreshTomato;
@@ -99,7 +105,24 @@ public class MainActivity extends AppCompatActivity {
 //        interpreterdemo();
 //        decoratordemo();
 //        templatedemo();
-        proxy_demo();
+        //proxy_demo();
+        command_demo();
+
+    }
+
+    void command_demo()
+    {
+        SimpleRemoteControl remote = new SimpleRemoteControl();
+        Light light = new Light();
+        Stereo stereo = new Stereo();
+
+        // we can change command dynamically
+        remote.setCommand(new LightOnCommand(light));
+        remote.buttonWasPressed();
+        remote.setCommand(new StereoOnWithCDCommand(stereo));
+        remote.buttonWasPressed();
+        remote.setCommand(new StereoOffCommand(stereo));
+        remote.buttonWasPressed();
     }
 
     void proxy_demo()
