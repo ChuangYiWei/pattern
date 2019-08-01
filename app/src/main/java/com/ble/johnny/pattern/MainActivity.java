@@ -35,6 +35,8 @@ import decorator.Margherita;
 import decorator.Paneer;
 import decorator.Pizza;
 import factory.FactoryPatternDemo;
+import flyweight.Circle;
+import flyweight.ShapeFactory;
 import interator.Iterator_test;
 import interator.NameRepository;
 import interpret.Context_Test;
@@ -106,8 +108,23 @@ public class MainActivity extends AppCompatActivity {
 //        decoratordemo();
 //        templatedemo();
         //proxy_demo();
-        command_demo();
+//        command_demo();
+        Flyweight_demo();
 
+    }
+
+    private static final String[] colors =
+            { "Red", "Green", "Blue", "White", "Black" };
+    void Flyweight_demo()
+    {
+        for(int i=0; i < 20; ++i) {
+            Circle circle =
+                    (Circle) ShapeFactory.getCircle(getRandomColor());
+            circle.setX(getRandomX());
+            circle.setY(getRandomY());
+            circle.setRadius(100);
+            circle.draw();
+        }
     }
 
     void command_demo()
@@ -305,6 +322,16 @@ public class MainActivity extends AppCompatActivity {
         ctx.executeStrategy(1,2);
 
         Log.d("Stradgeydemo","op multi : " + ctx.executeStrategy(1,2));
+    }
+
+    private static String getRandomColor() {
+        return colors[(int)(Math.random()*colors.length)];
+    }
+    private static int getRandomX() {
+        return (int)(Math.random()*100 );
+    }
+    private static int getRandomY() {
+        return (int)(Math.random()*100);
     }
 }
 
